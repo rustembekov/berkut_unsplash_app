@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:berkut_unsplash_app/core/di/injection.dart';
+import 'package:berkut_unsplash_app/core/config/app_strings.dart';
 import 'package:berkut_unsplash_app/features/photo_favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:berkut_unsplash_app/features/photo_search/presentation/widgets/photo_grid_item.dart';
 
@@ -13,7 +14,7 @@ class FavoritesPage extends StatelessWidget {
       create: (context) => getIt<FavoritesCubit>()..loadFavorites(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Избранное'),
+          title: Text(AppStrings.favorites),
         ),
         body: BlocBuilder<FavoritesCubit, FavoritesState>(
           builder: (context, state) {
@@ -32,9 +33,9 @@ class FavoritesPage extends StatelessWidget {
                   return PhotoGridItem(photo: photos[index]);
                 },
               ),
-              empty: () => const Center(
+              empty: () => Center(
                 child: Text(
-                  'Вы еще не добавили ни одного фото в избранное.',
+                  AppStrings.noFavoritesYet,
                   textAlign: TextAlign.center,
                 ),
               ),

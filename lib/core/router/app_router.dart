@@ -14,26 +14,27 @@ abstract class RouterModule {
       initialLocation: '/',
       routes: [
         GoRoute(
-          path: '/',
-          builder: (context, state) => const HomePage(),
-        ),
-        GoRoute(
-          path: '/search',
-          builder: (context, state) => const SearchPage(),
-        ),
-        GoRoute(
-          path: '/favorites',
-          builder: (context, state) => const FavoritesPage(),
-        ),
-        GoRoute(
-          path: '/photo',
-          name: 'photo_detail',
-          builder: (context, state) {
-            // Передаем весь объект PhotoEntity через extra
-            final photo = state.extra as PhotoEntity;
-            return PhotoDetailPage(photo: photo);
-          },
-        ),
+            path: '/',
+            builder: (context, state) => const HomePage(),
+            routes: [
+              GoRoute(
+                path: 'search',
+                builder: (context, state) => const SearchPage(),
+              ),
+              GoRoute(
+                path: 'favorites',
+                builder: (context, state) => const FavoritesPage(),
+              ),
+              GoRoute(
+                path: 'photo',
+                name: 'photo_detail',
+                builder: (context, state) {
+                  // Передаем весь объект PhotoEntity через extra
+                  final photo = state.extra as PhotoEntity;
+                  return PhotoDetailPage(photo: photo);
+                },
+              ),
+            ]),
       ],
     );
   }

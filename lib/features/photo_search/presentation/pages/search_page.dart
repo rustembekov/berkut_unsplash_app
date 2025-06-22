@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:berkut_unsplash_app/core/di/injection.dart';
+import 'package:berkut_unsplash_app/core/config/app_strings.dart';
 import 'package:berkut_unsplash_app/features/photo_search/presentation/bloc/photo_search/photo_search_cubit.dart';
 import 'package:berkut_unsplash_app/features/photo_search/presentation/widgets/photo_grid_item.dart';
 
@@ -13,7 +14,7 @@ class SearchPage extends StatelessWidget {
       create: (context) => getIt<PhotoSearchCubit>(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Поиск изображений'),
+          title: Text(AppStrings.searchHint),
         ),
         body: Column(
           children: [
@@ -22,11 +23,11 @@ class SearchPage extends StatelessWidget {
               child: BlocBuilder<PhotoSearchCubit, PhotoSearchState>(
                 builder: (context, state) {
                   return state.when(
-                    initial: () => const Center(child: Text('Введите запрос для начала поиска.')),
+                    initial: () => Center(child: Text(AppStrings.searchPhotosHint)),
                     loading: () => const Center(child: CircularProgressIndicator()),
                     loaded: (photos) {
                       if (photos.isEmpty) {
-                        return const Center(child: Text('Ничего не найдено.'));
+                        return Center(child: Text(AppStrings.noPhotosFound));
                       }
                       return GridView.builder(
                         padding: const EdgeInsets.all(8),
@@ -82,7 +83,7 @@ class _SearchFieldState extends State<_SearchField> {
       child: TextField(
         controller: _controller,
         decoration: InputDecoration(
-          labelText: 'Поиск...',
+          labelText: AppStrings.searchHint,
           border: const OutlineInputBorder(),
           suffixIcon: IconButton(
             icon: const Icon(Icons.search),
