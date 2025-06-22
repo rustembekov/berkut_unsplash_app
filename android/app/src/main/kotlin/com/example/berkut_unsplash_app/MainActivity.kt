@@ -1,4 +1,4 @@
-package com.example.berkut_unspalsh_app
+package com.example.berkut_unsplash_app
 
 import io.flutter.embedding.android.FlutterActivity
 
